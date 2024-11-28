@@ -1,6 +1,5 @@
 package com.aishpam.esdminiproject.service;
 
-import com.aishpam.esdminiproject.dto.CourseCodeReq;
 import com.aishpam.esdminiproject.dto.CourseReqRes;
 import com.aishpam.esdminiproject.dto.CourseDisplay;
 import com.aishpam.esdminiproject.dto.EmployeeReqRes;
@@ -12,7 +11,6 @@ import com.aishpam.esdminiproject.repository.CoursesRepo;
 import com.aishpam.esdminiproject.repository.EmployeeRepo;
 import com.aishpam.esdminiproject.repository.FacultyCoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -222,7 +220,7 @@ public class EmployeeManagementService {
     @Autowired
     private CoursesRepo coursesRepository;  // Repository to find course by courseId
 
-    public String updateCourseForEmployee(Integer employeeId, String courseCode) {
+    public  CourseDisplay updateCourseForEmployee(Integer employeeId, String courseCode) {
         // Step 1: Find the employee by ID
         Employees employee = employeesRepository.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -251,7 +249,7 @@ public class EmployeeManagementService {
             facultyCoursesRepository.save(newFacultyCourse);
         }
 
-        return "Course assignment updated successfully!";
+        return new CourseDisplay(course.getCourseId(), course.getCourseCode());
     }
 
 

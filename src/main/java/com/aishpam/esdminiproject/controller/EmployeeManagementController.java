@@ -2,27 +2,19 @@ package com.aishpam.esdminiproject.controller;
 
 
 
-import com.aishpam.esdminiproject.dto.CourseCodeReq;
 import com.aishpam.esdminiproject.dto.CourseDisplay;
 import com.aishpam.esdminiproject.dto.CourseReqRes;
 import com.aishpam.esdminiproject.dto.EmployeeReqRes;
-import com.aishpam.esdminiproject.entity.Courses;
 import com.aishpam.esdminiproject.entity.Employees;
-import com.aishpam.esdminiproject.entity.FacultyCourses;
 import com.aishpam.esdminiproject.repository.CoursesRepo;
-import com.aishpam.esdminiproject.repository.EmployeeRepo;
-import com.aishpam.esdminiproject.repository.FacultyCoursesRepository;
-import com.aishpam.esdminiproject.service.EmployeeDetailsService;
 import com.aishpam.esdminiproject.service.EmployeeManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class EmployeeManagementController {
@@ -82,13 +74,13 @@ public class EmployeeManagementController {
     }
 
     @PutMapping("/auth/{employeeId}/course")
-    public ResponseEntity<String> updateEmployeeCourse(
+    public ResponseEntity<CourseDisplay> updateEmployeeCourse(
             @PathVariable Integer employeeId,
-            @RequestBody CourseCodeReq updateCourseRequest) {
+            @RequestBody CourseDisplay updateCourseRequest) {
         System.out.println("Request received: Employee ID = " + employeeId + ", Course Code = " + updateCourseRequest.getCourseCode());
 
-        String responseMessage = employeeManagementService.updateCourseForEmployee(employeeId, updateCourseRequest.getCourseCode());
-        return ResponseEntity.ok(responseMessage);
+        CourseDisplay updatedCourseResponse = employeeManagementService.updateCourseForEmployee(employeeId, updateCourseRequest.getCourseCode());
+        return ResponseEntity.ok(updatedCourseResponse);
     }
 
 
