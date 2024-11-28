@@ -8,11 +8,11 @@ INSERT INTO Departments (department_id, name, capacity) VALUES
 
 #inserting into employees
 INSERT INTO Employees (employee_id, employee_ref_id,first_name, last_name, email, title, photograph_path,department,password) VALUES
-(12345, 12345,'John', 'Doe', 'john.doe@example.com', 'ROLE_USER', 'C:/Users/aishw/IdeaProjects/ESDMiniProject/src/main/resources/Images/John_Doe.jpeg',1,'$2a$10$FOGrA.UlJpVmN0SW30Qd0O2naQauzkla1neJj5RVbhkoMZwd8Xspy'),
-(23456,23456, 'Jane', 'Smith', 'jane.smith@example.com', 'ROLE_USER', 'C:/Users/aishw/IdeaProjects/ESDMiniProject/src/main/resources/Images/Jane_Smith.jpeg',1,'$2a$10$1SIhlY1M8Zcd2NAJkwIqp.Cf.05vQtaek8zUovLwE2h5/EBOU56EG'),
-(34567, 34567,'Alice', 'Johnson', 'alice.johnson@example.com', 'ROLE_USER', 'C:/Users/aishw/IdeaProjects/ESDMiniProject/src/main/resources/Images/Alice_Johnson.jpeg',1,'$2a$10$dw977FMujLlxUPLH1VAi3eAm5SZy8dtH3zzhNwJEHefPl5ZOi2q3y'),
-(45678,45678 ,'Bob', 'Brown', 'bob.brown@example.com', 'ROLE_ADMIN', 'C:/Users/aishw/IdeaProjects/ESDMiniProject/src/main/resources/Images/Bob_Brown.jpeg',3,'$2a$10$M41fO86/nhTDrlbP2FLe.eAy33Wp1sPtZtc3Y7.Jj6j.viwxvLfnK'),
-(56789,56789, 'Eve', 'Williams', 'eve.williams@example.com', 'ROLE_ADMIN', 'C:/Users/aishw/IdeaProjects/ESDMiniProject/src/main/resources/Images/Eve_Williams.jpeg',4,'$2a$10$c9bz6Q1BMqevxjdpdT4J/..QW3KOn3UiHAMUI521oUppFfBW18xeG');
+(12345, 12345,'John', 'Doe', 'john.doe@example.com', 'ROLE_USER', 'John_Doe.jpeg',1,'$2a$10$FOGrA.UlJpVmN0SW30Qd0O2naQauzkla1neJj5RVbhkoMZwd8Xspy'),
+(23456,23456, 'Jane', 'Smith', 'jane.smith@example.com', 'ROLE_USER', 'Jane_Smith.jpeg',1,'$2a$10$1SIhlY1M8Zcd2NAJkwIqp.Cf.05vQtaek8zUovLwE2h5/EBOU56EG'),
+(34567, 34567,'Alice', 'Johnson', 'alice.johnson@example.com', 'ROLE_USER', 'Alice_Johnson.jpeg',1,'$2a$10$dw977FMujLlxUPLH1VAi3eAm5SZy8dtH3zzhNwJEHefPl5ZOi2q3y'),
+(45678,45678 ,'Bob', 'Brown', 'bob.brown@example.com', 'ROLE_ADMIN', 'Bob_Brown.jpeg',3,'$2a$10$M41fO86/nhTDrlbP2FLe.eAy33Wp1sPtZtc3Y7.Jj6j.viwxvLfnK'),
+(56789,56789, 'Eve', 'Williams', 'eve.williams@example.com', 'ROLE_ADMIN', 'Eve_Williams.jpeg',4,'$2a$10$c9bz6Q1BMqevxjdpdT4J/..QW3KOn3UiHAMUI521oUppFfBW18xeG');
 
 #inserting into employee salary
 INSERT INTO Employee_salary (id, employee_id, payment_date, amount, description) VALUES

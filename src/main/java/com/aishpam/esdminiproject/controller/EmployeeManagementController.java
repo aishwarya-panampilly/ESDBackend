@@ -9,11 +9,17 @@ import com.aishpam.esdminiproject.entity.Employees;
 import com.aishpam.esdminiproject.repository.CoursesRepo;
 import com.aishpam.esdminiproject.service.EmployeeManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -83,5 +89,20 @@ public class EmployeeManagementController {
         return ResponseEntity.ok(updatedCourseResponse);
     }
 
+    private static final String PHOTO_DIRECTORY = "src/main/resources/Images";
 
+    @PutMapping("/auth/uploadPhoto/{userId}")
+    public ResponseEntity<String> uploadPhoto(@PathVariable Integer userId, @RequestParam("file") MultipartFile file) {
+        try {
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            Path path = Paths.get(PHOTO_DIRECTORY + fileName);
+            Files.write(path, file.getBytes());
+            // Assuming you have a method to update the user's photo in the database
+            employeeManagementService.updateUserPhoto(userId, fileName);
+
+            return ResponseEntity.ok("Photo uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading photo");
+        }
+    }
 }

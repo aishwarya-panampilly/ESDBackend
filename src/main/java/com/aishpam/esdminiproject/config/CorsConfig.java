@@ -16,6 +16,10 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedOrigins("*");
+
+                registry.addMapping("/images/**") // Allow access to images
+                        .allowedMethods("GET")
+                        .allowedOrigins("*");
             }
         };
     }

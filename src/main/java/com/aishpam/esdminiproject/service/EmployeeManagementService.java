@@ -6,6 +6,8 @@ import com.aishpam.esdminiproject.dto.EmployeeReqRes;
 import com.aishpam.esdminiproject.entity.Courses;
 import com.aishpam.esdminiproject.entity.Employees;
 import com.aishpam.esdminiproject.entity.FacultyCourses;
+import com.aishpam.esdminiproject.exception.BadRequestException;
+import com.aishpam.esdminiproject.exception.ResourceNotFoundException;
 import com.aishpam.esdminiproject.helper.JWTUtils;
 import com.aishpam.esdminiproject.repository.CoursesRepo;
 import com.aishpam.esdminiproject.repository.EmployeeRepo;
@@ -94,6 +96,11 @@ public class EmployeeManagementService {
 
         try {
             List<Employees> result = employeeRepo.findAll();
+            result.forEach(employee -> {
+                // Generate the photo URL for each employee
+                String photoUrl = "http://localhost:8080/images/" + employee.getPhotographPath();
+                employee.setPhotographPath(photoUrl); // Assuming photographPath is a field in Employees entity
+            });
             if (!result.isEmpty()) {
                 reqRes.setEmployeesList(result);
                 reqRes.setStatusCode(200);
@@ -115,6 +122,8 @@ public class EmployeeManagementService {
         try {
             Employees employee = employeeRepo.findById(id)
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
+            String photoUrl = "http://localhost:8080/images/" + employee.getPhotographPath();
+            employee.setPhotographPath(photoUrl); // Assuming photographPath is a field in Employees entity
             reqRes.setEmployees(employee);
             reqRes.setStatusCode(200);
             reqRes.setMessage("Employees with id '" + id + "' found successfully");
@@ -129,6 +138,9 @@ public class EmployeeManagementService {
     public EmployeeReqRes updateEmployee(Integer employeeId, Employees updatedEmployee) {
         EmployeeReqRes reqRes = new EmployeeReqRes();
         try {
+            if (updatedEmployee.getEmail() == null || updatedEmployee.getEmail().isEmpty()) {
+                throw new BadRequestException("Email is required");
+            }
             Employees existingUser = employeeRepo.findByEmployeeId(employeeId)
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
 
@@ -256,5 +268,12 @@ public class EmployeeManagementService {
         return new CourseDisplay(course.getCourseId(), course.getCourseCode());
     }
 
+    public void updateUserPhoto(Integer userId, String fileName) {
+        Employees employee = employeeRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+
+        employee.setPhotographPath(fileName); // Assuming the `Employee` entity has a `photo` field for the file name
+        employeeRepo.save(employee);
+    }
 
 }

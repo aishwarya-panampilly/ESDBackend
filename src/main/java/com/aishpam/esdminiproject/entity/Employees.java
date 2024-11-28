@@ -2,6 +2,8 @@ package com.aishpam.esdminiproject.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +35,8 @@ public class Employees implements UserDetails {
     @Column(name = "title")
     private String title;
 
+    @Setter
+    @Getter
     @Column(name = "photograph_path")
     private String photographPath;
 
