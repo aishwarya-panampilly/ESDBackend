@@ -2,6 +2,7 @@ package com.aishpam.esdminiproject.controller;
 
 
 
+import com.aishpam.esdminiproject.dto.CourseCodeReq;
 import com.aishpam.esdminiproject.dto.CourseDisplay;
 import com.aishpam.esdminiproject.dto.CourseReqRes;
 import com.aishpam.esdminiproject.dto.EmployeeReqRes;
@@ -21,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EmployeeManagementController {
@@ -79,17 +81,15 @@ public class EmployeeManagementController {
         return ResponseEntity.ok(employeeManagementService.getAllCourses());// Ensure this returns all courses
     }
 
-    // Endpoint to update a list of courses for a specific employee
-    @PutMapping("/employee/{employeeId}/course/{courseId}")
-    public ResponseEntity<FacultyCourses> updateCourseForEmployee(
+    @PutMapping("/auth/{employeeId}/course")
+    public ResponseEntity<String> updateEmployeeCourse(
             @PathVariable Integer employeeId,
-            @PathVariable Integer courseId,
-            @RequestBody FacultyCourses updatedCourse) {
+            @RequestBody CourseCodeReq updateCourseRequest) {
+        System.out.println("Request received: Employee ID = " + employeeId + ", Course Code = " + updateCourseRequest.getCourseCode());
 
-        // Call the service to update the course for the employee
-        FacultyCourses updatedFacultyCourse = employeeManagementService.updateCourseForEmployee(employeeId, courseId, updatedCourse);
-
-        // Return the updated FacultyCourses entity as response
-        return ResponseEntity.ok(updatedFacultyCourse);
+        String responseMessage = employeeManagementService.updateCourseForEmployee(employeeId, updateCourseRequest.getCourseCode());
+        return ResponseEntity.ok(responseMessage);
     }
+
+
 }

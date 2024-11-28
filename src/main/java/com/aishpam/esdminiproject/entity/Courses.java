@@ -11,10 +11,11 @@ public class Courses {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_id")
     private Integer courseId;
 
     @Getter
-    @Column(nullable = false, unique = true)
+    @Column(name = "course_code", nullable = false, unique = true)
     private String courseCode;
 
     private String name;
@@ -24,8 +25,9 @@ public class Courses {
     private Double credits;
     private Integer capacity;
 
+    @Setter
     @ManyToOne
-    @JoinColumn(name = "faculty_id", nullable = false)
+    @JoinColumn(name = "faculty_id", nullable = true)
     private Employees faculty;
 
 }

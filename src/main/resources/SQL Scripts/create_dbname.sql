@@ -42,7 +42,7 @@ create table if not exists Courses (
 );
 #Creating "Faculty_Courses" table
 create table if not exists Faculty_Courses (
-    id int primary key,
+    id int auto_increment primary key,
     faculty int not null,
     course_id int not null
 

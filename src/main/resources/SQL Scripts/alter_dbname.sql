@@ -20,7 +20,7 @@ references Employees(employee_ref_id)
 on update cascade,
 add constraint course_id foreign key (course_id)
 references Courses(course_id)
-on update cascade ;
+on update cascade;
 
 #for table "Courses"
 

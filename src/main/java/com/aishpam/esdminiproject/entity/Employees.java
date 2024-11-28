@@ -45,6 +45,7 @@ public class Employees implements UserDetails {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FacultyCourses> facultyCourses;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("title"));

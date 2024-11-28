@@ -4,25 +4,35 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
 @Entity
 @Table(name = "Faculty_Courses")
 public class FacultyCourses {
+
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
+    // Setter methods to properly set the employee and course
     @ManyToOne
     @JoinColumn(name = "faculty", nullable = false)
     private Employees employee;
 
-    @Setter
     @Getter
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Courses course;
 
-    public void setCourseId(Integer courseId) {
+
+    public Integer getCourseId() {
+        return this.course != null ? this.course.getCourseId() : null;
     }
-    public void setEmployee(Employees employee) {
+
+    public Integer getEmployeeId() {
+        return this.employee != null ? this.employee.getEmployeeId() : null;
     }
+
 }
+

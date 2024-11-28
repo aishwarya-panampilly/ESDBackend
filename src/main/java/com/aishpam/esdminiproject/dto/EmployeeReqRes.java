@@ -29,5 +29,4 @@ public class EmployeeReqRes {
     private Employees employees;
     private List<Employees> employeesList;
 
-
 }
