@@ -12,13 +12,20 @@ import com.aishpam.esdminiproject.helper.JWTUtils;
 import com.aishpam.esdminiproject.repository.CoursesRepo;
 import com.aishpam.esdminiproject.repository.EmployeeRepo;
 import com.aishpam.esdminiproject.repository.FacultyCoursesRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -133,6 +140,9 @@ public class EmployeeManagementService {
         }
         return reqRes;
     }
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Transactional
     public EmployeeReqRes updateEmployee(Integer employeeId, Employees updatedEmployee) {

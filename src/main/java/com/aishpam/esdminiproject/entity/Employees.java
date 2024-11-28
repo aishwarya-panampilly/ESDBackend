@@ -17,6 +17,7 @@ import java.util.List;
 @Data
 public class Employees implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id",nullable = false,unique = true) // Matches SQL column name
     private int employeeId;
 

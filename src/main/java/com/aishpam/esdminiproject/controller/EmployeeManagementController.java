@@ -8,6 +8,8 @@ import com.aishpam.esdminiproject.dto.EmployeeReqRes;
 import com.aishpam.esdminiproject.entity.Employees;
 import com.aishpam.esdminiproject.repository.CoursesRepo;
 import com.aishpam.esdminiproject.service.EmployeeManagementService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,6 +56,7 @@ public class EmployeeManagementController {
     public ResponseEntity<EmployeeReqRes> updateUser(@PathVariable Integer userId, @RequestBody Employees request) {
         return ResponseEntity.ok(employeeManagementService.updateEmployee(userId, request));
     }
+
 
     @GetMapping("/auth/get-profile")
     public ResponseEntity<EmployeeReqRes> getMyProfile() {
