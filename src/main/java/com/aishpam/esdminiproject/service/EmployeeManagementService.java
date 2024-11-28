@@ -222,6 +222,8 @@ public class EmployeeManagementService {
 
     public  CourseDisplay updateCourseForEmployee(Integer employeeId, String courseCode) {
         // Step 1: Find the employee by ID
+        System.out.println("Received employeeId: " + employeeId);
+        System.out.println("Received courseCode: " + courseCode);
         Employees employee = employeesRepository.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
@@ -240,13 +242,15 @@ public class EmployeeManagementService {
         if (existingFacultyCourse.isPresent()) {
             FacultyCourses facultyCourse = existingFacultyCourse.get();
             facultyCourse.setEmployee(employee); // Ensure the employee is correctly mapped to the course
-            facultyCoursesRepository.save(facultyCourse); // Save the updated mapping in FacultyCourses table
+            facultyCoursesRepository.save(facultyCourse);
+            System.out.println("FacultyCourse saved: " + facultyCourse.getId());// Save the updated mapping in FacultyCourses table
         } else {
             // If no entry exists, create a new one
             FacultyCourses newFacultyCourse = new FacultyCourses();
             newFacultyCourse.setEmployee(employee);
             newFacultyCourse.setCourse(course);
             facultyCoursesRepository.save(newFacultyCourse);
+            System.out.println("FacultyCourse saved: " + newFacultyCourse.getId());
         }
 
         return new CourseDisplay(course.getCourseId(), course.getCourseCode());
